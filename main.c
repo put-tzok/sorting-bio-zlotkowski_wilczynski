@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-unsigned int ns[] = { 10, /* TODO: fill in "n" i.e. instance sizes */ };
+unsigned int ns[] = { 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20 };
 
 void fill_increasing(int *t, unsigned int n) {
     for (unsigned int i = 0; i < n; i++) {
@@ -18,9 +18,15 @@ void fill_decreasing(int *t, unsigned int n) {
 }
 
 void fill_vshape(int *t, unsigned int n) {
-    for (unsigned int i = 0; i < n; i++) {
-        t[i] = ; // Myślę
-    }
+  for(int i = 0; i<n; i++){
+            if(i < n/2){
+    t[i]= n-(2*i);
+            }
+            else
+                {
+        t[i]=t[n-i]+1;
+            }
+    } //test
 }
 
 void selection_sort(int *t, unsigned int n) {
