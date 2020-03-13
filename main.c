@@ -55,9 +55,29 @@ void selection_sort(int *t, unsigned int n) {
 void insertion_sort(int *t, unsigned int n) {
     // TODO: implement
 }
-
+void quick_sort_rekurencja(int *t, int left, int right){
+    int pivot, temp, x_prog, y_prog;
+    pivot = t[right];
+    x_prog = left;
+    y_prog = right;
+    do{
+        while(t[x_prog]<pivot) x_prog++;
+        while(t[y_prog]>pivot) y_prog--;
+        if(x_prog<=y_prog){
+            temp=t[x_prog];
+            t[x_prog]=t[y_prog];
+            t[y_prog]=temp;
+            x_prog++;
+            y_prog--;
+        }
+    }while(x_prog<=y_prog);
+    if(y_prog>left) quick_sort_rekurencja(t, left, y_prog);
+    if(x_prog<right) quick_sort_rekurencja(t, x_prog, right);
+}
 void quick_sort(int *t, unsigned int n) {
-    // TODO: implement
+    int left;
+    left=0;
+    quick_sort_rekurencja(t, left, n);
 }
 
 void heap_sort(int *t, unsigned int n) {
