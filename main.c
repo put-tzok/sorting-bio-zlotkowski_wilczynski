@@ -18,15 +18,34 @@ void fill_decreasing(int *t, unsigned int n) {
 }
 
 void fill_vshape(int *t, unsigned int n) {
-  for(int i = 0; i<n; i++){
-            if(i < n/2){
-    t[i]= n-(2*i);
-            }
-            else
-                {
-        t[i]=t[n-i]+1;
-            }
-    } //test
+  for (int i = 0; i<n; i++){
+    t[i]=0;
+}
+for (int i = 0; i<=n;){
+        int x;
+if(i == 0){
+    x=0;
+}
+    if( i < n/2){
+        t[i]=1+n-(i*2+1);
+        i++;
+        continue;
+    }
+    if(i==n/2){
+        if(t[i] != 0){
+            break;
+        }else{
+            t[i]=1;
+            i=n;
+        }
+    }
+    if(i>n/2){
+        t[i]=t[x-1]-1;
+        i--;
+        x++;
+        continue;
+    }
+}
 }
 
 void selection_sort(int *t, unsigned int n) {
