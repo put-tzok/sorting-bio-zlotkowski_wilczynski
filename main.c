@@ -70,7 +70,32 @@ void selection_sort(int *t, unsigned int n) {
 }
 
 void insertion_sort(int *t, unsigned int n) {
-    // TODO: implement
+    if(n = 1)
+    {
+        ;
+    }
+    else
+    {
+        for(int i = 1; i < n; i++)
+        {
+            if(t[i] < t[i - 1])
+            {
+                int j;
+                for(int x = i - 1, j = 0; t[i] < t[x]; x--, j++) //j - liczymy ile wyrazów przesówamy
+                {
+                    ;
+                }
+                int temp = t[i];
+                int f = j;
+                for(int k = i; f > 0; k--, f--) // przesówamy
+                {
+                    t[k] = t[k - 1];
+                }
+                t[i - j] = temp;
+
+            }
+        }
+    }
 }
 void quick_sort_rekurencja(int *t, int left, int right){
     int pivot, temp, x_prog, y_prog;
