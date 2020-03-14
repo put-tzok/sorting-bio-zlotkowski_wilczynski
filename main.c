@@ -26,7 +26,7 @@ for(int i = 0; i<=n;){
         continue;
     }
     if(i==n/2){
-        if(t[i] != 0){
+        if(x != 0){
             break;
         }else{
             t[i]=1;
