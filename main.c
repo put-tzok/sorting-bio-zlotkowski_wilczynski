@@ -115,11 +115,37 @@ void quick_sort(int *t, unsigned int n) {
     left=0;
     quick_sort_rekurencja(t, left, n);
 }
-
-void heap_sort(int *t, unsigned int n) {
-    // TODO
-}
-
+void heap_sort(int *t,  int n){
+int temp;
+unsigned int N=n, parent = N/2, index, child;
+while (1){
+    if (parent > 0){
+        temp = t[--parent];
+    }else{
+        N--;
+        if (N==0){
+            return;
+        }
+        temp = t[N];
+        t[N]=t[0];
+    }
+    index = parent;
+    child = index;
+    while(child<N){
+        if (child + 1 < N  &&  t[child + 1] > t[child]) {
+                child++;
+            }
+            if (t[child] > temp) {
+                t[index] = t[child];
+                index = child;
+                child = index * 2 + 1;
+            } else {
+                break;
+            }
+        }
+        t[index] = temp;
+    }
+    }
 void fill_random(int *t, unsigned int n) {
     for (unsigned int i = 0; i < n; i++) {
         t[i] = rand();
