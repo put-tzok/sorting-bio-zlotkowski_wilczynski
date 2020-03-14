@@ -49,7 +49,24 @@ if(i == 0){
 }
 
 void selection_sort(int *t, unsigned int n) {
-    // TODO: implement
+    for(int i = 0; i < n - 1; i++)
+    {
+        int min = i;
+        int pierw = i;
+        for(int x = i + 1; x < n; x++)
+        {
+            if(t[min] > t[x])
+            {
+                min = x;
+            }
+        }
+        if(t[pierw] > t[min])
+        {
+          int temp = t[pierw];
+          t[pierw] = t[min];
+          t[min] = temp;
+        }
+    }
 }
 
 void insertion_sort(int *t, unsigned int n) {
