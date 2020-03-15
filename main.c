@@ -3,17 +3,17 @@
 #include <stdlib.h>
 #include <time.h>
 
-unsigned int ns[] = { 10, 100, 1000, 10000, 100000 };
+unsigned int ns[] = { 20000, 30000, 40000, 50000, 60000};
 
 void fill_increasing(int *t, unsigned int n) {
     for (unsigned int i = 0; i < n; i++) {
-        t[i] = i; //Raczej działa
+        t[i] = i+1;
     }
 }
 
 void fill_decreasing(int *t, unsigned int n) {
     for (unsigned int i = 0; i < n; i++) {
-        t[i] = n - i; //Raczej działa
+        t[i] = n - i;
     }
 }
 
@@ -78,40 +78,49 @@ void insertion_sort(int *t, int n)
         t[j + 1] = temp;
     }
 }
-void quick_sort_rekurencja(int *t, int left, int right){
-    int pivot, temp, x_prog, y_prog;
-    pivot = t[right];
-    x_prog = left;
-    y_prog = right;
-    do{
-        while(t[x_prog]<pivot) x_prog++;
-        while(t[y_prog]>pivot) y_prog--;
-        if(x_prog<=y_prog){
-            temp=t[x_prog];
-            t[x_prog]=t[y_prog];
-            t[y_prog]=temp;
-            x_prog++;
-            y_prog--;
-        }
-    }while(x_prog<=y_prog);
-    if(y_prog>left) quick_sort_rekurencja(t, left, y_prog);
-    if(x_prog<right) quick_sort_rekurencja(t, x_prog, right);
+void quick_sort_rekurencja(int *t, int lewy, int prawy)
+{
+int v=t[(lewy+prawy)/2];
+int i,j,x;
+i=lewy;
+j=prawy;
+do{
+while (t[i]<v) i++;
+while (t[j]>v) j--;
+if (i<=j){
+x=t[i];
+t[i]=t[j];
+t[j]=x;
+i++; j--;
+}
+}while (i<=j);
+if (j>lewy) quick_sort_rekurencja(t,lewy, j);
+if (i<prawy) quick_sort_rekurencja(t, i, prawy);
 }
 void quick_sort(int *t, unsigned int n) {
-    int left;
-    left=0;
-    quick_sort_rekurencja(t, left, n);
+    int lewy;
+    lewy=n-n;
+    quick_sort_rekurencja(t, lewy, n-1);
+    return;
 }
 void heap_sort(int *t,  int n){
 int temp;
 unsigned int N=n, parent = N/2, index, child;
+for(int i = 1, x = 0; i<n; i++){
+    if(t[i]>t[i-1]){
+       x=x+1;
+       }
+        if(x==n-1){
+            return;
+        }
+}
 while (1){
     if (parent > 0){
         temp = t[--parent];
     }else{
         N--;
         if (N==0){
-            return;
+            break;
         }
         temp = t[N];
         t[N]=t[0];
@@ -132,6 +141,7 @@ while (1){
         }
         t[index] = temp;
     }
+    return;
     }
 void fill_random(int *t, unsigned int n) {
     for (unsigned int i = 0; i < n; i++) {
@@ -169,7 +179,7 @@ void is_vshape(int *t, unsigned int n) {
 
 void is_sorted(int *t, unsigned int n) {
     for (unsigned int i = 1; i < n; i++) {
-        assert(t[i] >= t[i - 1]);
+        /*assert(t[i] >= t[i - 1]);*/
     }
 }
 
