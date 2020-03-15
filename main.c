@@ -64,7 +64,7 @@ void selection_sort(int *t, unsigned int n) {
 }
 
 void insertion_sort(int *t, unsigned int n) {
-    if(n = 1)
+    if(n == 1)
     {
         ;
     }
