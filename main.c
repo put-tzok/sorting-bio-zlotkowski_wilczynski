@@ -63,32 +63,19 @@ void selection_sort(int *t, unsigned int n) {
     }
 }
 
-void insertion_sort(int *t, unsigned int n) {
-    if(n == 1)
+void insertion_sort(int *t, int n)
+{
+    int j, temp;
+    for (int i = 1; i <= n - 1; i++)
     {
-        ;
-    }
-    else
-    {
-        for(int i = 1; i < n; i++)
+        temp = t[i];
+        j = i - 1;
+        while (j >= 0 && t[j] > temp)
         {
-            if(t[i] < t[i - 1])
-            {
-                int j;
-                for(int x = i - 1, j = 0; t[i] < t[x]; x--, j++) //j - liczymy ile wyrazów przesówamy
-                {
-                    ;
-                }
-                int temp = t[i];
-                int f = j;
-                for(int k = i; f > 0; k--, f--) // przesówamy
-                {
-                    t[k] = t[k - 1];
-                }
-                t[i - j] = temp;
-
-            }
+            t[j + 1] = t[j];
+            j--;
         }
+        t[j + 1] = temp;
     }
 }
 void quick_sort_rekurencja(int *t, int left, int right){
