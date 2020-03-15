@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-unsigned int ns[] = { 20000, 30000, 40000, 50000, 60000, 70000, 80000, 90000, 100000};
+unsigned int ns[] = {10000, 20000, 30000, 40000, 50000, 60000, 70000, 80000, 90000, 100000};
 
 void fill_increasing(int *t, unsigned int n) {
     for (unsigned int i = 0; i < n; i++) {
