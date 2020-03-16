@@ -103,46 +103,69 @@ void quick_sort(int *t, unsigned int n) {
     quick_sort_rekurencja(t, lewy, n-1);
     return;
 }
-void heap_sort(int *t,  int n){
-int temp;
-unsigned int N=n, parent = N/2, index, child;
-for(int i = 1, x = 0; i<n; i++){
-    if(t[i]>t[i-1]){
-       x=x+1;
-       }
-        if(x==n-1){
+void heap_porz(int *heap, int i)
+{
+    if(heap[i] < heap[(i-1)/2])
+    {
+        int temp;
+        temp = heap[(i-1)/2];
+        heap[(i-1)/2] = heap[i];
+        heap[i] = temp;
+        heap_porz(heap, (i-1)/2);
+    }
+}
+void heap_balans(int *heap, int x, int n, int i)
+{
+    int temp;
+    if((2*x + 2) >= (n - i))
+    {
+        if((2*x + 1) >= (n - i))
+        {
             return;
         }
+        else
+        {
+            temp = heap[2*x + 1];
+            heap[2*x + 1] = heap[x];
+            heap[x] = temp;
+            heap_balans(heap, 2*x + 1, n, i);
+        }
+    }
+    else{
+    if(heap[x] > heap[2*x + 1] || heap[x] > heap[2*x + 2])
+    {
+        if(heap[2*x + 1] < heap[2*x + 2])
+        {
+            temp = heap[2*x + 1];
+            heap[2*x + 1] = heap[x];
+            heap[x] = temp;
+            heap_balans(heap, 2*x + 1, n, i);
+        }
+        else
+        {
+            temp = heap[2*x + 2];
+            heap[2*x + 2] = heap[x];
+            heap[x] = temp;
+            heap_balans(heap, 2*x + 2, n, i);
+        }
+    }
+    }
 }
-while (1){
-    if (parent > 0){
-        temp = t[--parent];
-    }else{
-        N--;
-        if (N==0){
-            break;
-        }
-        temp = t[N];
-        t[N]=t[0];
-    }
-    index = parent;
-    child = index;
-    while(child<N){
-        if (child + 1 < N  &&  t[child + 1] > t[child]) {
-                child++;
-            }
-            if (t[child] > temp) {
-                t[index] = t[child];
-                index = child;
-                child = index * 2 + 1;
-            } else {
-                break;
-            }
-        }
-        t[index] = temp;
-    }
-    return;
-    }
+void heap_sort(int *t,  int n){
+int heap[n];
+heap[0] = t[0];
+for(int i = 1; i < n; i ++)//wypełnianie kopca
+{
+    heap[i] = t[i];
+    heap_porz(heap, i);
+}
+for(int i = 0; i < n; i++)//przenosimy kopiec do tablicy t
+{
+    t[i] = heap[0];
+    heap[0] = heap[n-(i+1)];
+    heap_balans(heap, 0, n, i);
+}
+}
 void fill_random(int *t, unsigned int n) {
     for (unsigned int i = 0; i < n; i++) {
         t[i] = rand();
